@@ -14,7 +14,7 @@ app.use(cors({
 }))
 const io = socket(server,{
     cors:{
-        origin : "*",
+        origin : "http://127.0.0.1:5500",
         methods: ["GET", "POST"],
         allowedHeaders: ["Content-Type","Access-Control-Allow-Origin"]
     }
