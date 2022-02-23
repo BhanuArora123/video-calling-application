@@ -19,8 +19,8 @@ document.getElementById("btn").addEventListener("click",function(){
     let roomId = this.value; 
     let peer = new Peer(undefined,{
         path: "/peerjs",
-        host: "video-calling-application12345.herokuapp.com",
-        port: "443",
+        host: "peerserver-video-app.herokuapp.com",
+        secure : true
       });
     peer.on("open",(id) => {
       socketIo.emit("join-room",roomId,id);

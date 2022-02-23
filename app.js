@@ -14,7 +14,9 @@ app.use(cors({
 }))
 const io = socket(server,{
     cors:{
-        origin : "*"
+        origin : "*",
+        methods: ["GET", "POST"],
+        allowedHeaders: ["Content-Type"]
     }
 });
 io.on("connection",(socket) => {
