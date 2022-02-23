@@ -1,4 +1,4 @@
-const socketIo = io("http://localhost:3000/");
+const socketIo = io("https://video-calling-application12345.herokuapp.com");
 const addVideoStream = (video, stream) => {
   const videoGrid = document.getElementById("video-grid");
   video.srcObject = stream;
@@ -16,7 +16,7 @@ document.getElementById("btn").addEventListener("click",function(){
     let roomId = this.value; 
     let peer = new Peer(undefined,{
         path: "/peerjs",
-        host: "localhost",
+        host: "video-calling-application12345.herokuapp.com",
         port: "443",
       });
     peer.on("open",(id) => {
