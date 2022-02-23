@@ -1,4 +1,7 @@
 const socketIo = io("https://video-calling-application12345.herokuapp.com");
+socketIo.on("connection", (socket) => {
+  console.log("connect through websockets");
+})
 const addVideoStream = (video, stream) => {
   const videoGrid = document.getElementById("video-grid");
   video.srcObject = stream;

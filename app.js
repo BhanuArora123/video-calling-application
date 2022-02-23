@@ -3,12 +3,12 @@ const app = express();
 const socket = require("socket.io");
 let server = app.listen(process.env.PORT||3000);
 const cors = require("cors");
-const { ExpressPeerServer } = require("peer");
-const peerServer = ExpressPeerServer(server, {
-  debug: true,
-});
+// const { ExpressPeerServer } = require("peer");
+// const peerServer = ExpressPeerServer(server, {
+//   debug: true,
+// });
 
-app.use("/peerjs", peerServer);
+// app.use("/peerjs", peerServer);
 app.use(cors({
     origin : "*"
 }))
