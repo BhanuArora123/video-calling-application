@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const socket = require("socket.io");
-let server = app.listen(3000);
+let server = app.listen(process.env.PORT||3000);
 const cors = require("cors");
 const { ExpressPeerServer } = require("peer");
 const peerServer = ExpressPeerServer(server, {
