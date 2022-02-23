@@ -16,7 +16,7 @@ const io = socket(server,{
     cors:{
         origin : "*",
         methods: ["GET", "POST"],
-        allowedHeaders: ["Content-Type"]
+        allowedHeaders: ["Content-Type","Access-Control-Allow-Origin"]
     }
 });
 io.on("connection",(socket) => {
