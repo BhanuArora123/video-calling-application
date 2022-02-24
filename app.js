@@ -23,6 +23,6 @@ io.on("connection",(socket) => {
     console.log("client connected");
     socket.on("join-room",(roomId,userId) => {
         socket.join(roomId);
-        socket.to(roomId).broadcast.emit("user-connected",userId);
+        socket.to(roomId).emit("user-connected",userId);
     });
 })
