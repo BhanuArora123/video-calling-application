@@ -28,25 +28,33 @@ document.getElementById("btn").addEventListener("click",function(){
     });
     navigator.mediaDevices.getUserMedia({
       video : true,
-      audio : false
+      audio : true
     }).then((stream) => {
       const video = document.createElement("video");
       videoStream = stream;
       addVideoStream(video,stream);
       peer.on("call",(call) => {
+        console.log(call.connectionId);
         console.log("called up");
         call.answer(stream);
         call.on("stream",(otherUserStream) => {
-          const video = document.createElement("video");
-          addVideoStream(video,otherUserStream);
+          if(!usersInCall[call.connectionId]){
+            const video = document.createElement("video");
+            addVideoStream(video,otherUserStream);
+            usersInCall[call.connectionId] = true;
+          }
         })
       });
       socketIo.on("user-connected",(userId,socketId) => {
         console.log("emitted");
         const call = peer.call(userId,videoStream);
         call.on("stream",(otherUserStream) => {
-          const video = document.createElement("video");
-          addVideoStream(video,otherUserStream);
+          console.log(socketId);
+          if(!usersInCall[socketId]){
+            const video = document.createElement("video");
+            addVideoStream(video,otherUserStream);
+            usersInCall[socketId] = true;
+          }
         })
       })
     })
