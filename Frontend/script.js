@@ -10,6 +10,7 @@ const addVideoStream = (video, stream) => {
     videoGrid.append(video);
   });
 };
+let usersInCall = {};
 let videoStream;
 document.getElementById("btn").addEventListener("click",function(){
     let videoGridParent = document.getElementById("video-grid-parent");
@@ -27,19 +28,21 @@ document.getElementById("btn").addEventListener("click",function(){
     });
     navigator.mediaDevices.getUserMedia({
       video : true,
-      audio : true
+      audio : false
     }).then((stream) => {
       const video = document.createElement("video");
       videoStream = stream;
       addVideoStream(video,stream);
       peer.on("call",(call) => {
+        console.log("called up");
         call.answer(stream);
         call.on("stream",(otherUserStream) => {
           const video = document.createElement("video");
           addVideoStream(video,otherUserStream);
         })
       });
-      socketIo.on("user-connected",(userId) => {
+      socketIo.on("user-connected",(userId,socketId) => {
+        console.log("emitted");
         const call = peer.call(userId,videoStream);
         call.on("stream",(otherUserStream) => {
           const video = document.createElement("video");
