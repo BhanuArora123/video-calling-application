@@ -14,16 +14,17 @@ let usersInCall = {};
 let videoStream;
 document.getElementById("btn").addEventListener("click",function(){
     let videoGridParent = document.getElementById("video-grid-parent");
+    let roomId = document.getElementById("join").value;
     videoGridParent.innerHTML = `
       <div id="video-grid"></div>
     `;
-    let roomId = this.value; 
     let peer = new Peer(undefined,{
         path: "/peerjs",
         host: "peerserver-video-app.herokuapp.com",
         secure : true
       });
     peer.on("open",(id) => {
+      console.log(roomId);
       socketIo.emit("join-room",roomId,id);
     });
     navigator.mediaDevices.getUserMedia({
